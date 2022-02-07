@@ -55,6 +55,12 @@ local function plugins(use)
     'neovim/nvim-lspconfig',
     config = require 'config.lspconfig'.config
   }
+  -- Git integration
+  use {
+    'lewis6991/gitsigns.nvim',
+    requires = {{'nvim-lua/plenary.nvim'}},
+    config = require 'config.gitsigns'.config
+  }
   -- Colorscheme
   use 'tomasr/molokai'
 end
