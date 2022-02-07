@@ -1,4 +1,5 @@
 local modules = {
+  'options',
   'plugins',
   'mappings',
 }
