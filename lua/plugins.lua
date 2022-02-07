@@ -28,6 +28,11 @@ local function plugins(use)
     'feline-nvim/feline.nvim',
     config = require 'config.feline'.config
   }
+  -- Syntax highlighting
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate'
+  }
   -- Colorscheme
   use 'tomasr/molokai'
 end
