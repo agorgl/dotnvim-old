@@ -61,6 +61,8 @@ local function plugins(use)
     requires = {{'nvim-lua/plenary.nvim'}},
     config = require 'config.gitsigns'.config
   }
+  -- Surround editing
+  use 'tpope/vim-surround'
   -- Colorscheme
   use 'tomasr/molokai'
 end
