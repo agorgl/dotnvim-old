@@ -23,6 +23,8 @@ local function plugins(use)
     'kyazdani42/nvim-tree.lua',
     config = require 'config.nvimtree'.config
   }
+  -- Colorscheme
+  use 'tomasr/molokai'
 end
 
 local ok, packer = pcall(require, "packer")
