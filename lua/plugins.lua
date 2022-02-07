@@ -23,6 +23,11 @@ local function plugins(use)
     'kyazdani42/nvim-tree.lua',
     config = require 'config.nvimtree'.config
   }
+  -- Statusline
+  use {
+    'feline-nvim/feline.nvim',
+    config = require 'config.feline'.config
+  }
   -- Colorscheme
   use 'tomasr/molokai'
 end
