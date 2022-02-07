@@ -33,6 +33,11 @@ local function plugins(use)
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate'
   }
+  -- LSP configurations
+  use {
+    'neovim/nvim-lspconfig',
+    config = require 'config.lspconfig'.config
+  }
   -- Colorscheme
   use 'tomasr/molokai'
 end
