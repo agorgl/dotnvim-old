@@ -1,5 +1,6 @@
 local modules = {
-  'plugins'
+  'plugins',
+  'mappings',
 }
 
 for _, m in ipairs(modules) do
