@@ -13,6 +13,11 @@ end
 local function plugins(use)
   -- Plugin manager
   use 'wbthomason/packer.nvim'
+  -- Fuzzy finder
+  use {
+    'nvim-telescope/telescope.nvim',
+    requires = {{'nvim-lua/plenary.nvim'}}
+  }
 end
 
 local ok, packer = pcall(require, "packer")
