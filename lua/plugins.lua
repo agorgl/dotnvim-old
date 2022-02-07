@@ -18,6 +18,11 @@ local function plugins(use)
     'nvim-telescope/telescope.nvim',
     requires = {{'nvim-lua/plenary.nvim'}}
   }
+  -- File explorer
+  use {
+    'kyazdani42/nvim-tree.lua',
+    config = require 'config.nvimtree'.config
+  }
 end
 
 local ok, packer = pcall(require, "packer")

@@ -10,3 +10,6 @@ g.maplocalleader = ","
 map("n", "<leader>ff", "<cmd>Telescope find_files<CR>", opts)
 map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", opts)
 map("n", "<leader>gt", "<cmd>Telescope git_status<CR>", opts)
+
+-- NVim Tree
+map("n", "<F2>", "<cmd>NvimTreeToggle<CR>", opts)
