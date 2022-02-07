@@ -33,6 +33,11 @@ local function plugins(use)
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate'
   }
+  -- Completion engine
+  use {
+    "hrsh7th/nvim-cmp",
+    config = require("config.cmp").config
+  }
   -- LSP configurations
   use {
     'neovim/nvim-lspconfig',
