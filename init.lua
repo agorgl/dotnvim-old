@@ -2,6 +2,7 @@ local modules = {
   'options',
   'plugins',
   'mappings',
+  'colors',
 }
 
 for _, m in ipairs(modules) do
