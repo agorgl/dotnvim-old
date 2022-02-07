@@ -38,6 +38,18 @@ local function plugins(use)
     "hrsh7th/nvim-cmp",
     config = require("config.cmp").config
   }
+  -- Buffer completion source
+  use {
+    "hrsh7th/cmp-buffer",
+  }
+  -- Path completion source
+  use {
+    "hrsh7th/cmp-path",
+  }
+  -- LSP completion source
+  use {
+    "hrsh7th/cmp-nvim-lsp",
+  }
   -- LSP configurations
   use {
     'neovim/nvim-lspconfig',

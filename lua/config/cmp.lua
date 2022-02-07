@@ -6,7 +6,13 @@ function M.config()
     return
   end
 
-  plugin.setup {}
+  plugin.setup {
+    sources = {
+      { name = "nvim_lsp" },
+      { name = "buffer" },
+      { name = "path" },
+    },
+  }
 end
 
 return M
