@@ -67,6 +67,11 @@ local function plugins(use)
     requires = {{'nvim-lua/plenary.nvim'}},
     config = function() require 'config.gitsigns'.config() end
   }
+  -- Autopairs
+  use {
+    'windwp/nvim-autopairs',
+    config = function() require 'config.autopairs'.config() end
+  }
   -- Surround editing
   use 'tpope/vim-surround'
   -- Colorscheme
