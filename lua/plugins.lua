@@ -23,12 +23,12 @@ local function plugins(use)
   -- File explorer
   use {
     'kyazdani42/nvim-tree.lua',
-    config = require 'config.nvimtree'.config
+    config = function() require 'config.nvimtree'.config() end
   }
   -- Statusline
   use {
     'feline-nvim/feline.nvim',
-    config = require 'config.feline'.config
+    config = function() require 'config.feline'.config() end
   }
   -- Syntax highlighting
   use {
@@ -38,7 +38,7 @@ local function plugins(use)
   -- Completion engine
   use {
     "hrsh7th/nvim-cmp",
-    config = require("config.cmp").config
+    config = function() require("config.cmp").config() end
   }
   -- Buffer completion source
   use {
@@ -55,13 +55,13 @@ local function plugins(use)
   -- LSP configurations
   use {
     'neovim/nvim-lspconfig',
-    config = require 'config.lspconfig'.config
+    config = function() require 'config.lspconfig'.config() end
   }
   -- Git integration
   use {
     'lewis6991/gitsigns.nvim',
     requires = {{'nvim-lua/plenary.nvim'}},
-    config = require 'config.gitsigns'.config
+    config = function() require 'config.gitsigns'.config() end
   }
   -- Surround editing
   use 'tpope/vim-surround'
