@@ -83,3 +83,6 @@ if not ok then
 end
 
 packer.startup(plugins)
+if not ok then
+  packer.sync()
+end
