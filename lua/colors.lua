@@ -34,4 +34,4 @@ cmd [[
 
 -- Colorscheme
 local colorscheme = "molokai"
-cmd("colorscheme " .. colorscheme)
+cmd("silent! colorscheme " .. colorscheme)
