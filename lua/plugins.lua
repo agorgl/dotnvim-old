@@ -57,6 +57,10 @@ local function plugins(use)
     'neovim/nvim-lspconfig',
     config = function() require 'config.lspconfig'.config() end
   }
+  -- LSP signature hints
+  use {
+    "ray-x/lsp_signature.nvim",
+  }
   -- Git integration
   use {
     'lewis6991/gitsigns.nvim',

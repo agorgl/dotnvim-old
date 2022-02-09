@@ -15,6 +15,14 @@ function M.config()
   local on_attach = function(client, bufnr)
     -- Enable completion triggered by <c-x><c-o>
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+    -- Enable signature plugin
+    local lsp_signature = require "lsp_signature"
+    lsp_signature.on_attach({
+      bind = true,
+      handler_opts = {
+        border = "rounded"
+      }
+    }, bufnr)
     -- Mappings
     setup_lsp_mappings(bufnr)
   end
