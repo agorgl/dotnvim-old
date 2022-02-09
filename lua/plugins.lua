@@ -1,5 +1,7 @@
+local cmd = vim.cmd
+local fn = vim.fn
+
 local function packer_setup()
-  local fn = vim.fn
   local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
   if fn.empty(fn.glob(install_path)) > 0 then
     print "Cloning packer..."
@@ -66,6 +68,14 @@ local function plugins(use)
   -- Colorscheme
   use 'tomasr/molokai'
 end
+
+local luapath = fn.resolve(fn.stdpath("config")) .. "/lua"
+cmd(string.format([[
+augroup packer_user_config
+  autocmd!
+  autocmd BufWritePost %s/plugins.lua,%s/config/*.lua source <afile> | PackerCompile
+augroup end
+]], luapath, luapath))
 
 local ok, packer = pcall(require, "packer")
 if not ok then
