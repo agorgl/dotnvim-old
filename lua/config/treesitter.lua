@@ -6,7 +6,13 @@ function M.config()
     return
   end
 
-  plugin.setup {}
+  plugin.setup {
+    ensure_installed = "maintained",
+    highlight = {
+      enable = true,
+      disable = { "c", "rust" },
+    }
+  }
 end
 
 return M

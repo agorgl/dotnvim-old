@@ -33,7 +33,8 @@ local function plugins(use)
   -- Syntax highlighting
   use {
     'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate'
+    run = ':TSUpdate',
+    config = function() require 'config.treesitter'.config() end
   }
   -- Completion engine
   use {
