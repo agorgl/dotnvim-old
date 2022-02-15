@@ -18,16 +18,7 @@ function M.config()
       ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
       ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
       ['<C-e>'] = cmp.mapping { i = cmp.mapping.abort(), c = cmp.mapping.close() },
-      ['<CR>'] = cmp.mapping {
-        i = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false },
-        c = function(fallback)
-          if cmp.visible() then
-            cmp.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false }
-          else
-            fallback()
-          end
-        end,
-      },
+      ['<CR>'] = cmp.mapping.confirm({ select = true }),
       ['<Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item()
@@ -37,7 +28,7 @@ function M.config()
             fallback()
           end
         end,
-        { 'i', 's', 'c', }
+        { 'i', 's', }
       ),
       ['<S-Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
@@ -46,7 +37,7 @@ function M.config()
             fallback()
           end
         end,
-        { 'i', 's', 'c', }
+        { 'i', 's', }
       ),
     },
     sources = {
