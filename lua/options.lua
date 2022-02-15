@@ -18,5 +18,5 @@ set.fixendofline = false                        -- Do not restore eol in end of 
 set.termguicolors = true                        -- Enable 24-bit RGB color in the TUI
 set.pumheight = 12                              -- Height of the pop up menu
 set.completeopt = { "menuone", "noselect" }     -- Options for insert mode completion
-set.timeoutlen = 300                            -- Length of time to wait for a mapped sequence
+set.timeoutlen = 1000                           -- Length of time to wait for a mapped sequence
 set.updatetime = 300                            -- Length of time to wait before triggering the plugin
