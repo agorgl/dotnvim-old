@@ -27,6 +27,43 @@ function M.config()
     setup_lsp_mappings(bufnr)
   end
 
+  local fn = vim.fn
+  local lsp = vim.lsp
+  local diagnostic = vim.diagnostic
+
+  lsp.handlers["textDocument/hover"] = lsp.with(
+    lsp.handlers.hover, {
+      border = "rounded"
+    }
+  )
+
+  lsp.handlers["textDocument/signatureHelp"] = lsp.with(
+    lsp.handlers.signature_help, {
+      border = "rounded"
+    }
+  )
+
+  diagnostic.config({
+    underline = true,
+    virtual_text = false,
+    signs = true,
+    update_in_insert = true,
+    float = {
+      border = "rounded"
+    }
+  })
+
+  -- Diagnostic signs
+  local diagnostic_signs = {
+    { name = "DiagnosticSignError", text = "✘✘" },
+    { name = "DiagnosticSignWarn", text = "!!" },
+    { name = "DiagnosticSignInfo", text = "--" },
+    { name = "DiagnosticSignHint", text = "**" },
+  }
+  for _, sign in ipairs(diagnostic_signs) do
+    fn.sign_define(sign.name, { text = sign.text, texthl = sign.name })
+  end
+
   local servers = {
     "ccls",
     "rust_analyzer",
