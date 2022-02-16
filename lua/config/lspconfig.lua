@@ -28,6 +28,7 @@ function M.config()
   end
 
   local fn = vim.fn
+  local cmd = vim.cmd
   local lsp = vim.lsp
   local diagnostic = vim.diagnostic
 
@@ -52,6 +53,8 @@ function M.config()
       border = "rounded"
     }
   })
+
+  cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, { focus = false })]]
 
   -- Diagnostic signs
   local diagnostic_signs = {
