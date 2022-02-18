@@ -28,11 +28,11 @@ function M.config()
     end
   end
 
-  local lighter_hl = hl_from_name("LineNr")
+  local lighter_hl = function() return hl_from_name("LineNr") end
   local mode_hl = function()
     return {
       fg = vi_mode_utils.get_mode_color(),
-      bg = lighter_hl.bg,
+      bg = lighter_hl().bg,
     }
   end
 
