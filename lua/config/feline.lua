@@ -11,8 +11,8 @@ function M.config()
   local function hl_from_name(name)
     local hl = vim.api.nvim_get_hl_by_name(name, true)
     return {
-      bg = string.format("#%X", hl.background),
-      fg = string.format("#%X", hl.foreground),
+      bg = hl.background and string.format("#%X", hl.background) or "NONE",
+      fg = hl.foreground and string.format("#%X", hl.foreground) or "NONE",
     }
   end
 
