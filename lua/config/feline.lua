@@ -118,7 +118,7 @@ function M.config()
     c[dir .. '_sep'] = c[dir .. '_sep'] or {}
     local sep = c[dir .. '_sep']
     local sep_idx = ({left = 1, right = #sep + 1})[dir]
-    local sep_hl = not inverted and c.hl or nil
+    local sep_hl = not inverted and c.hl or hl_invert(c.hl)
     table.insert(sep, sep_idx, { str = s, hl = sep_hl })
   end
 
