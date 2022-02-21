@@ -139,7 +139,9 @@ function M.config()
 
         component.hl = invert and hl_invert(component.hl) or component.hl
         surround(component, ' ')
-        sepadd(component, sep, direction, invert, force)
+        if ({ left = 1, right = (#components) })[direction] ~= i then
+          sepadd(component, sep, direction, invert, force)
+        end
       end
     end
   end
