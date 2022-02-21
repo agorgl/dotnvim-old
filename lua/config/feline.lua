@@ -7,6 +7,7 @@ function M.config()
   end
 
   local vi_mode_utils = require('feline.providers.vi_mode')
+  local file_utils = require('feline.providers.file')
 
   local function hl_from_name(name)
     local hl = vim.api.nvim_get_hl_by_name(name, true)
@@ -46,7 +47,7 @@ function M.config()
         icon = '',
       },
       {
-        provider = 'git_branch',
+        provider = 'git_branch_dir',
         hl = mode_hl,
         icon = '',
       },
@@ -59,17 +60,17 @@ function M.config()
     -- Right
     {
       {
-        provider = 'file_type',
+        provider = 'file_type_lower',
         hl = mode_hl,
         icon = '',
       },
       {
-        provider = 'file_encoding',
+        provider = 'file_encoding_lower',
         hl = mode_hl,
         icon = '',
       },
       {
-        provider = 'file_format',
+        provider = 'file_format_lower',
         hl = mode_hl,
         icon = '',
       },
@@ -151,6 +152,21 @@ function M.config()
 
   plugin.setup {
     components = { active = active, inactive = inactive },
+    custom_providers = {
+      git_branch_dir = function()
+        return vim.g.gitsigns_head or ''
+      end,
+      file_type_lower = function(component, opts)
+        local v = file_utils.file_type(component, opts):lower()
+        return v ~= '' and v or 'no ft'
+      end,
+      file_encoding_lower = function()
+        return file_utils.file_encoding():lower()
+      end,
+      file_format_lower = function()
+        return file_utils.file_format():lower()
+      end
+    }
   }
 end
 
