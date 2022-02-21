@@ -83,7 +83,7 @@ local luapath = fn.resolve(fn.stdpath("config")) .. "/lua"
 cmd(string.format([[
 augroup packer_user_config
   autocmd!
-  autocmd BufWritePost %s/plugins.lua,%s/config/*.lua source <afile> | PackerCompile
+  autocmd BufWritePost %s/plugins.lua source <afile> | PackerCompile
 augroup end
 ]], luapath, luapath))
 
