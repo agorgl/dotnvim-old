@@ -1,5 +1,40 @@
 local M = {}
 
+local g = vim.g
+local fn = vim.fn
+local cmd = vim.cmd
+
+local function trailing_whitespace()
+  -- Check for trailing whitespace
+  -- Must not have space after the last non-whitespace character
+  local trailing = fn.search('\\s$', 'nw')
+  local trailing_component = trailing ~= 0 and '[' .. trailing .. ']' .. 'trailing' or ''
+  -- Check for mixed indent
+  -- Must be all spaces or all tabs before the first non-whitespace character
+  local mixed_indent = fn.search('\v(^\t+ +)|(^ +\t+)', 'nw')
+  local mixed_component = mixed_indent ~= 0 and '[' .. mixed_indent .. ']' .. 'mixed indent' or ''
+  -- Pick first non empty
+  local components = {mixed_component, trailing_component}
+  for _, c in pairs(components) do
+    if c ~= '' then
+      return c
+    end
+  end
+  return ''
+end
+
+feline_trailing_whitespace = ''
+function feline_trailing_whitespace_refresh()
+  feline_trailing_whitespace = trailing_whitespace()
+end
+
+cmd [[
+  augroup feline_trailing_whitespace
+    autocmd!
+    autocmd CursorHold,BufWritePost * lua feline_trailing_whitespace_refresh()
+  augroup end
+]]
+
 function M.config()
   local ok, plugin = pcall(require, "feline")
   if not ok then
@@ -85,7 +120,7 @@ function M.config()
         icon = '',
       },
       {
-        provider = '',
+        provider = 'trailing_whitespace',
         hl = mode_hl,
         invert = true,
         icon = '',
@@ -157,7 +192,7 @@ function M.config()
     components = { active = active, inactive = inactive },
     custom_providers = {
       git_branch_dir = function()
-        return vim.g.gitsigns_head or ''
+        return g.gitsigns_head or ''
       end,
       file_type_lower = function(component, opts)
         local v = file_utils.file_type(component, opts):lower()
@@ -168,6 +203,9 @@ function M.config()
       end,
       file_format_lower = function()
         return file_utils.file_format():lower()
+      end,
+      trailing_whitespace = function()
+        return feline_trailing_whitespace
       end
     }
   }
