@@ -1,5 +1,6 @@
 local cmd = vim.cmd
 local api = vim.api
+local fn = vim.fn
 local v = vim.v
 
 -- Border match tweak
@@ -31,6 +32,36 @@ cmd [[
     autocmd VimLeave * lua border_color_reset()
   augroup end
 ]]
+
+-- Highlight tweaks
+function signs_background_match(name)
+  local bg = fn.synIDattr(fn.synIDtrans(fn.hlID("SignColumn")), "bg#")
+
+  local groups = {
+    "LineNr",
+    "DiagnosticSignError",
+    "DiagnosticSignWarn",
+    "DiagnosticSignInfo",
+    "DiagnosticSignHint",
+    "GitSignsAdd",
+    "GitSignsChange",
+    "GitSignsDelete",
+  }
+
+  for _, group in pairs(groups) do
+    local hl = "highlight " .. group .. " guibg=" .. (bg ~= "" and bg or "NONE")
+    cmd(hl)
+  end
+end
+
+if signs_background_match_tweak_enabled then
+  cmd [[
+    augroup signs_background
+      autocmd!
+      autocmd ColorScheme * lua signs_background_match()
+    augroup end
+  ]]
+end
 
 -- Colorscheme
 local colorscheme = "molokai"
