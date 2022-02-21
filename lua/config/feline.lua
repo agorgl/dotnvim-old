@@ -85,7 +85,7 @@ function M.config()
         icon = '',
       },
       {
-        provider = ' ',
+        provider = '',
         hl = mode_hl,
         invert = true,
         icon = '',
@@ -115,12 +115,12 @@ function M.config()
   end
 
   -- Adds a separator to a component in the given direction
-  local function sepadd(c, s, dir, inverted)
+  local function sepadd(c, s, dir, inverted, force)
     c[dir .. '_sep'] = c[dir .. '_sep'] or {}
     local sep = c[dir .. '_sep']
     local sep_idx = ({left = 1, right = #sep + 1})[dir]
     local sep_hl = not inverted and c.hl or hl_invert(c.hl)
-    table.insert(sep, sep_idx, { str = s, hl = sep_hl })
+    table.insert(sep, sep_idx, { str = s, hl = sep_hl, always_visible = force })
   end
 
   -- Styles a component by adding padding and separator
@@ -133,12 +133,13 @@ function M.config()
     for i, component in pairs(components) do
       if component.provider then
         local invert = component.invert
+        local force = i == #components
         local mode = invert and 'inverted' or 'normal'
         local sep = sep[mode]
 
         component.hl = invert and hl_invert(component.hl) or component.hl
         surround(component, ' ')
-        sepadd(component, sep, direction, invert)
+        sepadd(component, sep, direction, invert, force)
       end
     end
   end
