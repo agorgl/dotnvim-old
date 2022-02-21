@@ -131,7 +131,7 @@ function M.config()
   local inactive = {
     {
       {
-        provider = 'file_type',
+        provider = 'file_info',
         hl = mode_hl,
         invert = true,
         icon = '',
