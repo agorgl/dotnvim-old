@@ -6,7 +6,13 @@ function M.config()
     return
   end
 
-  plugin.setup {}
+  plugin.setup {
+    shade_terminals = false,
+    direction = 'float',
+    float_opts = {
+      border = 'curved',
+    }
+  }
 end
 
 return M

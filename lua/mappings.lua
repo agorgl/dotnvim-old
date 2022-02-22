@@ -42,3 +42,7 @@ map("n", "<M-n>", "<cmd>tabnext<CR>", opts)
 map("n", "<M-p>", "<cmd>tabprev<CR>", opts)
 map("t", "<M-n>", "<cmd>tabnext<CR>", opts)
 map("t", "<M-p>", "<cmd>tabprev<CR>", opts)
+
+-- ToggleTerm
+map("n", "<leader>t", "<cmd>ToggleTerm<CR>", opts)
+map("t", "<leader>t", "<cmd>ToggleTerm<CR>", opts)
