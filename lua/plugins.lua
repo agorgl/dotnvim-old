@@ -73,6 +73,8 @@ local function plugins(use)
   }
   -- Surround editing
   use 'tpope/vim-surround'
+  -- Buffer option heuristics
+  use 'tpope/vim-sleuth'
   -- Colorscheme
   use 'tomasr/molokai'
 end
