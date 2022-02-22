@@ -39,19 +39,12 @@ local function plugins(use)
   -- Completion engine
   use {
     "hrsh7th/nvim-cmp",
+    requires = {
+      {"hrsh7th/cmp-buffer"},
+      {"hrsh7th/cmp-path"},
+      {"hrsh7th/cmp-nvim-lsp"},
+    },
     config = function() require("config.cmp").config() end
-  }
-  -- Buffer completion source
-  use {
-    "hrsh7th/cmp-buffer",
-  }
-  -- Path completion source
-  use {
-    "hrsh7th/cmp-path",
-  }
-  -- LSP completion source
-  use {
-    "hrsh7th/cmp-nvim-lsp",
   }
   -- LSP configurations
   use {
