@@ -36,3 +36,9 @@ function setup_lsp_mappings(bufnr)
   bmap(bufnr, "n", "<leader>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
   bmap(bufnr, "n", "<leader>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
 end
+
+-- Tabs
+map("n", "<M-n>", "<cmd>tabnext<CR>", opts)
+map("n", "<M-p>", "<cmd>tabprev<CR>", opts)
+map("t", "<M-n>", "<cmd>tabnext<CR>", opts)
+map("t", "<M-p>", "<cmd>tabprev<CR>", opts)
