@@ -61,6 +61,11 @@ local function plugins(use)
     requires = {{'nvim-lua/plenary.nvim'}},
     config = function() require 'config.gitsigns'.config() end
   }
+  -- Terminal manager
+  use {
+    'akinsho/toggleterm.nvim',
+    config = function() require 'config.toggleterm'.config() end
+  }
   -- Autopairs
   use {
     'windwp/nvim-autopairs',
