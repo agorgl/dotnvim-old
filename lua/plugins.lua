@@ -62,6 +62,11 @@ local function plugins(use)
     requires = {{'nvim-lua/plenary.nvim'}},
     config = function() require 'config.gitsigns'.config() end
   }
+  -- Project manager
+  use {
+    'ahmedkhalf/project.nvim',
+    config = function() require 'config.project'.config() end
+  }
   -- Terminal manager
   use {
     'akinsho/toggleterm.nvim',
