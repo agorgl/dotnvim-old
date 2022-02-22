@@ -64,5 +64,26 @@ if signs_background_match_tweak_enabled then
 end
 
 -- Colorscheme
-local colorscheme = "molokai"
-cmd("silent! colorscheme " .. colorscheme)
+local colorscheme = "onedark"
+function colorscheme_load()
+  cmd("silent! colorscheme " .. colorscheme)
+  local c = require('onedark.colors')
+  colors = {
+    bg = c.bg1,
+    fg = c.fg,
+    black = c.black,
+    red = c.red,
+    green = c.green,
+    blue = c.blue,
+    cyan = c.cyan,
+    yellow = c.yellow,
+    orange = c.orange,
+    purple = c.purple,
+    grey = c.grey,
+    light_grey = c.light_grey,
+    dark_cyan = c.dark_cyan,
+    dark_purple = c.dark_purple,
+    dark_red = c.dark_red,
+    dark_yellow = c.dark_yellow,
+  }
+end

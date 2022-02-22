@@ -28,7 +28,8 @@ local function plugins(use)
   -- Statusline
   use {
     'feline-nvim/feline.nvim',
-    config = function() require 'config.feline'.config() end
+    config = function() require 'config.feline'.config() end,
+    after = 'onedark.nvim'
   }
   -- Syntax highlighting
   use {
@@ -76,7 +77,10 @@ local function plugins(use)
   -- Buffer option heuristics
   use 'tpope/vim-sleuth'
   -- Colorscheme
-  use 'tomasr/molokai'
+  use {
+    'navarasu/onedark.nvim',
+    config = function() require 'config.onedark'.config() end
+  }
 end
 
 local luapath = fn.resolve(fn.stdpath("config")) .. "/lua"

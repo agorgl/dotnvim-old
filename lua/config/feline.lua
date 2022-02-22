@@ -44,14 +44,6 @@ function M.config()
   local vi_mode_utils = require('feline.providers.vi_mode')
   local file_utils = require('feline.providers.file')
 
-  local function hl_from_name(name)
-    local hl = vim.api.nvim_get_hl_by_name(name, true)
-    return {
-      bg = hl.background and string.format("#%X", hl.background) or "NONE",
-      fg = hl.foreground and string.format("#%X", hl.foreground) or "NONE",
-    }
-  end
-
   local function hl_invert(hl)
     if type(hl) == 'function' then
       return function() return hl_invert(hl()) end
@@ -64,11 +56,15 @@ function M.config()
     end
   end
 
-  local lighter_hl = function() return hl_from_name("LineNr") end
+  local lighter_hl = {
+    fg = colors.fg,
+    bg = colors.bg
+  }
   local mode_hl = function()
     return {
+      name = vi_mode_utils.get_mode_highlight_name(),
       fg = vi_mode_utils.get_mode_color(),
-      bg = lighter_hl().bg,
+      bg = colors.bg,
     }
   end
 
@@ -189,6 +185,7 @@ function M.config()
   end
 
   plugin.setup {
+    theme = colors,
     components = { active = active, inactive = inactive },
     custom_providers = {
       git_branch_dir = function()
