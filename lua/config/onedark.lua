@@ -8,6 +8,7 @@ function M.config()
 
   plugin.setup {
     style = 'darker',
+    toggle_style_key = '<NOP>',
     highlights = {
       NvimTreeNormal = {bg = '$bg0'},
       NvimTreeVertSplit = {bg = '$bg0'},
