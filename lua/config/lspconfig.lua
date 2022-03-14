@@ -19,6 +19,7 @@ function M.config()
     local lsp_signature = require "lsp_signature"
     lsp_signature.on_attach({
       bind = true,
+      hint_enable = false,
       handler_opts = {
         border = "rounded"
       }
