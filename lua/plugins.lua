@@ -86,6 +86,11 @@ local function plugins(use)
     'windwp/nvim-autopairs',
     config = function() require 'config.autopairs'.config() end
   }
+  -- Autotags
+  use {
+    'windwp/nvim-ts-autotag',
+    config = function() require 'config.autotags'.config() end
+  }
   -- Surround editing
   use 'tpope/vim-surround'
   -- Buffer option heuristics
