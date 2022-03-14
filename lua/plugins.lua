@@ -61,6 +61,10 @@ local function plugins(use)
   use {
     "ray-x/lsp_signature.nvim",
   }
+  -- LSP integration with external utilities
+  use {
+    "jose-elias-alvarez/null-ls.nvim",
+  }
   -- Git integration
   use {
     'lewis6991/gitsigns.nvim',

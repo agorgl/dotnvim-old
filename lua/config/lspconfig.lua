@@ -85,6 +85,26 @@ function M.config()
       }
     }
   end
+
+  local null_ls = require "null-ls"
+  local nlb = null_ls.builtins
+
+  local sources = {
+    -- Formatting
+    nlb.formatting.prettierd,
+
+    -- Diagnostics
+    nlb.diagnostics.eslint,
+    nlb.diagnostics.flake8,
+
+    -- Actions
+    nlb.code_actions.gitsigns,
+  }
+
+  null_ls.setup {
+    sources = sources,
+    on_attach = on_attach,
+  }
 end
 
 return M
