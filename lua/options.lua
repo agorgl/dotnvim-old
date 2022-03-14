@@ -1,6 +1,7 @@
 local set = vim.opt
 
 set.fileencoding = "utf-8"                      -- File content encoding for the buffer
+set.fileformats = { "unix", "dos" }             -- End of line formats for the buffer
 set.wrap = false                                -- Disable wrapping of lines longer than the width of window
 set.number = true                               -- Show line numbers
 set.mouse = "a"                                 -- Enable mouse support
