@@ -44,8 +44,13 @@ local function plugins(use)
       {"hrsh7th/cmp-buffer"},
       {"hrsh7th/cmp-path"},
       {"hrsh7th/cmp-nvim-lsp"},
+      {"saadparwaiz1/cmp_luasnip"},
     },
     config = function() require("config.cmp").config() end
+  }
+  -- Snippet engine
+  use {
+    "L3MON4D3/LuaSnip"
   }
   -- LSP configurations
   use {
