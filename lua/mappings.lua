@@ -44,6 +44,6 @@ map("t", "<M-n>", "<cmd>tabnext<CR>", opts)
 map("t", "<M-p>", "<cmd>tabprev<CR>", opts)
 
 -- ToggleTerm
-map("n", "<leader>r", "<cmd>lua require('toggleterm').exec('exec ' .. tasks.run, nil, nil, nil, 'tab')<CR>", opts)
+map("n", "<leader>rr", "<cmd>lua require('toggleterm').exec('exec ' .. tasks.run, nil, nil, nil, 'tab')<CR>", opts)
 map("n", "<leader>t", "<cmd>ToggleTerm<CR>", opts)
 map("t", "<leader>t", "<cmd>ToggleTerm<CR>", opts)
