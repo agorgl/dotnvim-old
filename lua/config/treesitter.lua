@@ -7,7 +7,7 @@ function M.config()
   end
 
   plugin.setup {
-    ensure_installed = "maintained",
+    ensure_installed = "all",
     highlight = {
       enable = true,
       disable = { "c", "rust" },
