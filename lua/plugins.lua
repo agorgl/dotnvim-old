@@ -31,6 +31,11 @@ local function plugins(use)
     config = function() require 'config.feline'.config() end,
     after = 'onedark.nvim'
   }
+  -- Tabline
+  use {
+    'akinsho/bufferline.nvim',
+    config = function() require 'config.bufferline'.config() end
+  }
   -- Syntax highlighting
   use {
     'nvim-treesitter/nvim-treesitter',
