@@ -45,6 +45,19 @@ local function project_type(root)
   return nil
 end
 
+function M.exec(task)
+  local terminal = require('toggleterm.terminal').Terminal
+  local term = terminal:new({
+    cmd = tasks[task or 'run'],
+    direction = 'tab',
+    close_on_exit = false,
+    on_open = function(term)
+      vim.cmd("startinsert!")
+    end,
+  })
+  term:toggle()
+end
+
 function M.config()
   local ok, plugin = pcall(require, "project_nvim")
   if not ok then
