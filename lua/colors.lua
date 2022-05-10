@@ -1,5 +1,5 @@
-local cmd = vim.cmd
 local api = vim.api
+local cmd = vim.cmd
 local fn = vim.fn
 local v = vim.v
 
@@ -22,19 +22,12 @@ local function match_border_bg()
   end
 end
 
-border_color_match = match_border_bg
-border_color_reset = border_reset
-
-cmd [[
-  augroup border_color
-    autocmd!
-    autocmd ColorScheme * lua border_color_match()
-    autocmd VimLeave * lua border_color_reset()
-  augroup end
-]]
+local border_color_group = api.nvim_create_augroup('border_color', { clear = true })
+api.nvim_create_autocmd('ColorScheme', { group = border_color_group, pattern = '*', callback = match_border_bg })
+api.nvim_create_autocmd('VimLeave', { group = border_color_group, pattern = '*', callback = border_reset })
 
 -- Highlight tweaks
-function signs_background_match(name)
+local function signs_background_match()
   local bg = fn.synIDattr(fn.synIDtrans(fn.hlID("SignColumn")), "bg#")
 
   local groups = {
@@ -55,12 +48,8 @@ function signs_background_match(name)
 end
 
 if signs_background_match_tweak_enabled then
-  cmd [[
-    augroup signs_background
-      autocmd!
-      autocmd ColorScheme * lua signs_background_match()
-    augroup end
-  ]]
+  local signs_background_group = api.nvim_create_augroup('signs_background', { clear = true })
+  api.nvim_create_autocmd('ColorScheme', { group = signs_background_group, pattern = '*', callback = signs_background_match })
 end
 
 -- Colorscheme

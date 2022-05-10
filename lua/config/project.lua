@@ -64,12 +64,14 @@ function M.config()
     return
   end
 
+  local api = vim.api
+
   plugin.setup {
     manual_mode = true,
   }
 
   local project = require("project_nvim.project")
-  project_tasks_setup = function()
+  local project_tasks_setup = function()
     local root = project.get_project_root()
     local type = project_type(root)
     if type then
@@ -77,7 +79,12 @@ function M.config()
     end
   end
 
-  vim.cmd [[autocmd VimEnter * lua project_tasks_setup()]]
+  local tasks_setup_group = api.nvim_create_augroup('tasks_setup', { clear = true })
+  api.nvim_create_autocmd('VimEnter', {
+    group = tasks_setup_group,
+    pattern = '*',
+    callback = project_tasks_setup,
+  })
 end
 
 return M

@@ -1,3 +1,4 @@
+local api = vim.api
 local cmd = vim.cmd
 local fn = vim.fn
 
@@ -110,12 +111,12 @@ local function plugins(use)
 end
 
 local luapath = fn.resolve(fn.stdpath("config")) .. "/lua"
-cmd(string.format([[
-augroup packer_user_config
-  autocmd!
-  autocmd BufWritePost %s/plugins.lua source <afile> | PackerCompile
-augroup end
-]], luapath, luapath))
+local packer_group = api.nvim_create_augroup('packer_user_config', { clear = true })
+api.nvim_create_autocmd('BufWritePost', {
+  group = packer_group,
+  pattern = string.format('%s/plugins.lua', luapath),
+  command = 'source <afile> | PackerCompile',
+})
 
 local ok, packer = pcall(require, "packer")
 if not ok then

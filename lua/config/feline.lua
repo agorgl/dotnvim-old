@@ -2,6 +2,7 @@ local M = {}
 
 local g = vim.g
 local fn = vim.fn
+local api = vim.api
 local cmd = vim.cmd
 
 local function trailing_whitespace()
@@ -24,16 +25,12 @@ local function trailing_whitespace()
 end
 
 feline_trailing_whitespace = ''
-function feline_trailing_whitespace_refresh()
+local function feline_trailing_whitespace_refresh()
   feline_trailing_whitespace = trailing_whitespace()
 end
 
-cmd [[
-  augroup feline_trailing_whitespace
-    autocmd!
-    autocmd CursorHold,BufWritePost * lua feline_trailing_whitespace_refresh()
-  augroup end
-]]
+local feline_trailing_whitespace_group = api.nvim_create_augroup('feline_trailing_whitespace', { clear = true })
+api.nvim_create_autocmd({'CursorHold', 'BufWritePost'}, { group = feline_trailing_whitespace_group, pattern = '*', callback = feline_trailing_whitespace_refresh })
 
 function M.config()
   local ok, plugin = pcall(require, "feline")

@@ -29,6 +29,7 @@ function M.config()
   end
 
   local fn = vim.fn
+  local api = vim.api
   local cmd = vim.cmd
   local lsp = vim.lsp
   local diagnostic = vim.diagnostic
@@ -55,7 +56,14 @@ function M.config()
     }
   })
 
-  cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, { focus = false })]]
+  local diagnostic_open_group = api.nvim_create_augroup('diagnostic_open', { clear = true })
+  api.nvim_create_autocmd({'CursorHold', 'CursorHoldI'}, {
+    group = diagnostic_open_group,
+    pattern = '*',
+    callback = function()
+      vim.diagnostic.open_float(nil, { focus = false })
+    end
+  })
 
   -- Diagnostic signs
   local diagnostic_signs = {
