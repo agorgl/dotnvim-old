@@ -76,6 +76,8 @@ local function plugins(use)
     requires = {{'nvim-lua/plenary.nvim'}},
     config = function() require 'config.gitsigns'.config() end
   }
+  -- Git wrapper
+  use 'tpope/vim-fugitive'
   -- Project manager
   use {
     'ahmedkhalf/project.nvim',

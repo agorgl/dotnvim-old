@@ -43,6 +43,9 @@ map("n", "<M-p>", "<cmd>tabprev<CR>", opts)
 map("t", "<M-n>", "<cmd>tabnext<CR>", opts)
 map("t", "<M-p>", "<cmd>tabprev<CR>", opts)
 
+-- Fugitive
+map("n", "<leader>gg", "<cmd>tab G<CR>", opts)
+
 -- ToggleTerm
 map("n", "<leader>rr", "<cmd>lua require('config.project').exec()<CR>", opts)
 map("n", "<leader>t", "<cmd>ToggleTerm<CR>", opts)
