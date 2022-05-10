@@ -19,7 +19,13 @@ local function plugins(use)
   -- Fuzzy finder
   use {
     'nvim-telescope/telescope.nvim',
+    config = function() require 'config.telescope'.config() end,
     requires = {{'nvim-lua/plenary.nvim'}}
+  }
+  -- Fuzzy finder backend
+  use {
+    'nvim-telescope/telescope-fzf-native.nvim',
+    run = 'make'
   }
   -- File explorer
   use {
