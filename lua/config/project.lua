@@ -31,6 +31,16 @@ local types = {
       clean = "npm ci",
     },
   },
+  expo = {
+    patterns = {
+      "app.json",
+    },
+    tasks = {
+      run = "expo start",
+      build = "expo export --dev",
+      clean = "npm ci",
+    },
+  },
 }
 
 local function project_type(root)
