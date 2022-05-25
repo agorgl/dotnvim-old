@@ -77,6 +77,11 @@ local function plugins(use)
   use {
     "jose-elias-alvarez/null-ls.nvim",
   }
+  -- LSP progress ui
+  use {
+    'j-hui/fidget.nvim',
+    config = function() require 'config.fidget'.config() end
+  }
   -- Git integration
   use {
     'lewis6991/gitsigns.nvim',
