@@ -21,3 +21,4 @@ set.pumheight = 12                              -- Height of the pop up menu
 set.completeopt = { "menuone", "noselect" }     -- Options for insert mode completion
 set.timeoutlen = 1000                           -- Length of time to wait for a mapped sequence
 set.updatetime = 300                            -- Length of time to wait before triggering the plugin
+set.signcolumn = "auto:1"                       -- When and how to draw the signcolumn
