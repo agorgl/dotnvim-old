@@ -1,5 +1,4 @@
-local map = vim.api.nvim_set_keymap
-local bmap = vim.api.nvim_buf_set_keymap
+local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 local g = vim.g
 
@@ -16,37 +15,35 @@ map("n", "<leader>gt", "<cmd>Telescope git_status<CR>", opts)
 map("n", "<F2>", "<cmd>NvimTreeToggle<CR>", opts)
 
 -- LSP
-map("n", "<space>e", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-map("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
-map("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
-map("n", "<space>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
+map("n", "<space>e", vim.diagnostic.open_float, opts)
+map("n", "[d", vim.diagnostic.goto_prev, opts)
+map("n", "]d", vim.diagnostic.goto_next, opts)
+map("n", "<space>q", vim.diagnostic.setloclist, opts)
 
 function setup_lsp_mappings(bufnr)
-  bmap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-  bmap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-  bmap(bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-  bmap(bufnr, "n", "gt", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
-  bmap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-  bmap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-  bmap(bufnr, "n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-  bmap(bufnr, "n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-  bmap(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-  bmap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-  bmap(bufnr, "n", "<leader>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
-  bmap(bufnr, "n", "<leader>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
-  bmap(bufnr, "n", "<leader>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
+  local opts = { noremap = true, silent = true, buffer = bufnr }
+  map("n", "gd", vim.lsp.buf.definition, opts)
+  map("n", "gD", vim.lsp.buf.declaration, opts)
+  map("n", "gi", vim.lsp.buf.implementation, opts)
+  map("n", "gt", vim.lsp.buf.type_definition, opts)
+  map("n", "gr", vim.lsp.buf.references, opts)
+  map("n", "K", vim.lsp.buf.hover, opts)
+  map("n", "<C-k>", vim.lsp.buf.signature_help, opts)
+  map("n", "<leader>f", vim.lsp.buf.formatting, opts)
+  map("n", "<leader>rn", vim.lsp.buf.rename, opts)
+  map("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+  map("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts)
+  map("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts)
+  map("n", "<leader>wl", function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, opts)
 end
 
 -- Tabs
-map("n", "<M-n>", "<cmd>tabnext<CR>", opts)
-map("n", "<M-p>", "<cmd>tabprev<CR>", opts)
-map("t", "<M-n>", "<cmd>tabnext<CR>", opts)
-map("t", "<M-p>", "<cmd>tabprev<CR>", opts)
+map({"n","t"}, "<M-n>", "<cmd>tabnext<CR>", opts)
+map({"n","t"}, "<M-p>", "<cmd>tabprev<CR>", opts)
 
 -- Fugitive
 map("n", "<leader>gg", "<cmd>tab G<CR>", opts)
 
 -- ToggleTerm
-map("n", "<leader>rr", "<cmd>lua require('config.project').exec()<CR>", opts)
-map("n", "<leader>t", "<cmd>ToggleTerm<CR>", opts)
-map("t", "<leader>t", "<cmd>ToggleTerm<CR>", opts)
+map("n", "<leader>rr", require('config.project').exec, opts)
+map({"n","t"}, "<leader>t", "<cmd>ToggleTerm<CR>", opts)
