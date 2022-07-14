@@ -82,7 +82,8 @@ function M.config()
     "gopls",
     "jdtls",
     "tsserver",
-    "pyright"
+    "pyright",
+    "clojure_lsp",
   }
   for _, lsp in pairs(servers) do
     plugin[lsp].setup {
