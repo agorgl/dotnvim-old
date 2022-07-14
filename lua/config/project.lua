@@ -11,6 +11,14 @@ local types = {
       clean = "cargo clean",
     },
   },
+  clojure = {
+    patterns = {
+      "deps.edn",
+    },
+    tasks = {
+      run = "clj -M:repl/headless",
+    },
+  },
   maven = {
     patterns = {
       "pom.xml",
