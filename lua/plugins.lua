@@ -119,6 +119,8 @@ local function plugins(use)
     'navarasu/onedark.nvim',
     config = function() require 'config.onedark'.config() end
   }
+  -- Interactive evaluation
+  use 'Olical/conjure'
 end
 
 local luapath = fn.resolve(fn.stdpath("config")) .. "/lua"
