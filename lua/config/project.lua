@@ -91,6 +91,11 @@ function M.exec(task)
   term:toggle()
 end
 
+function M.exec_background(task)
+  local toggleterm = require('toggleterm')
+  toggleterm.exec(tasks[task or 'run'], nil, nil, nil, 'float', true, false)
+end
+
 function M.config()
   local ok, plugin = pcall(require, "project_nvim")
   if not ok then
