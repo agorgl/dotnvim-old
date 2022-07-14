@@ -15,6 +15,9 @@ local types = {
     patterns = {
       "pom.xml",
     },
+    skip_patterns = {
+      "deps.edn",
+    },
     tasks = {
       run = "mvn spring-boot:run",
       build = "mvn build",
@@ -45,10 +48,22 @@ local types = {
 
 local function project_type(root)
   local fn = vim.fn
+
+  local should_skip = function(p)
+    for _, spat in pairs(p.skip_patterns) do
+      if fn.empty(fn.glob(spat)) == 0 then
+        return true
+      end
+    end
+    return false
+  end
+
   for t, p in pairs(types) do
     for _, pat in pairs(p.patterns) do
       if fn.empty(fn.glob(pat)) == 0 then
-        return t
+        if not (p.skip_patterns and should_skip(p)) then
+          return t
+        end
       end
     end
   end
