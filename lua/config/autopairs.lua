@@ -11,7 +11,9 @@ function M.config()
   local cmp = require('cmp')
   cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 
-  plugin.setup {}
+  plugin.setup {
+    enable_check_bracket_line = false,
+  }
 end
 
 return M
