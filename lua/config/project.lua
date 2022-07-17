@@ -18,6 +18,7 @@ local types = {
     tasks = {
       run = "clj -M:repl/headless",
     },
+    autorun = 'run',
   },
   maven = {
     patterns = {
@@ -127,6 +128,11 @@ function M.config()
     local type = project_type(root)
     if type then
       tasks = types[type].tasks
+      autorun = types[type].autorun
+      if autorun then
+        print(string.format("Launching '%s' in background", tasks[autorun]))
+        M.exec_background(autorun)
+      end
     end
   end
 
