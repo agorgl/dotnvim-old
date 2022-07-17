@@ -45,6 +45,6 @@ map({"n","t"}, "<M-p>", "<cmd>tabprev<CR>", opts)
 map("n", "<leader>gg", "<cmd>tab G<CR>", opts)
 
 -- ToggleTerm
-map("n", "<leader>rr", require('config.project').exec, opts)
-map("n", "<leader>rb", require('config.project').exec_background, opts)
+map({"n","t"}, "<leader>rr", require('config.project').exec, opts)
+map({"n","t"}, "<leader>rb", require('config.project').exec_background, opts)
 map({"n","t"}, "<leader>t", "<cmd>ToggleTerm<CR>", opts)
