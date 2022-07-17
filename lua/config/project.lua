@@ -78,8 +78,17 @@ local function project_type(root)
   return nil
 end
 
-function M.exec(task)
-  local terminal = require('toggleterm.terminal').Terminal
+function M.exec(task, background)
+  local toggleterm_terminal = require('toggleterm.terminal')
+  local terminal = toggleterm_terminal.Terminal
+
+  local terms = toggleterm_terminal.get_all(true)
+  if next(terms) then
+    local term = terms[1]
+    term:toggle()
+    return
+  end
+
   local term = terminal:new({
     cmd = tasks[task or 'run'],
     direction = 'tab',
@@ -88,12 +97,16 @@ function M.exec(task)
       vim.cmd("startinsert!")
     end,
   })
-  term:toggle()
+
+  if not background then
+    term:toggle()
+  else
+    term:spawn()
+  end
 end
 
 function M.exec_background(task)
-  local toggleterm = require('toggleterm')
-  toggleterm.exec(tasks[task or 'run'], nil, nil, nil, 'float', true, false)
+  M.exec(task, true)
 end
 
 function M.config()
