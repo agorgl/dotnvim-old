@@ -92,7 +92,7 @@ function M.exec(task, background)
 
   local term = terminal:new({
     cmd = tasks[task or 'run'],
-    direction = 'tab',
+    direction = 'horizontal',
     close_on_exit = false,
     on_open = function(term)
       vim.cmd("startinsert!")
