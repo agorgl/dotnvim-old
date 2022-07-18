@@ -121,6 +121,9 @@ local function plugins(use)
   }
   -- Interactive evaluation
   use 'Olical/conjure'
+  -- Sexp editing
+  use 'guns/vim-sexp'
+  use 'tpope/vim-sexp-mappings-for-regular-people'
 end
 
 local luapath = fn.resolve(fn.stdpath("config")) .. "/lua"
