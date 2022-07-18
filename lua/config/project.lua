@@ -20,6 +20,14 @@ local types = {
     },
     autorun = 'run',
   },
+  clojurescript = {
+    patterns = {
+      "shadow-cljs.edn",
+    },
+    tasks = {
+      run = "npx shadow-cljs watch app",
+    },
+  },
   maven = {
     patterns = {
       "pom.xml",
@@ -36,6 +44,9 @@ local types = {
   npm = {
     patterns = {
       "package.json",
+    },
+    skip_patterns = {
+      "shadow-cljs.edn",
     },
     tasks = {
       run = "npm run dev",
