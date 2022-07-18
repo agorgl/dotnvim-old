@@ -126,6 +126,11 @@ local function plugins(use)
   -- Sexp editing
   use 'guns/vim-sexp'
   use 'tpope/vim-sexp-mappings-for-regular-people'
+  -- Smart lisp editing
+  use {
+    'eraserhd/parinfer-rust',
+    run = 'cargo build --release'
+  }
 end
 
 local luapath = fn.resolve(fn.stdpath("config")) .. "/lua"
