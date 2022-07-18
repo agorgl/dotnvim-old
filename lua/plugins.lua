@@ -16,6 +16,8 @@ end
 local function plugins(use)
   -- Plugin manager
   use 'wbthomason/packer.nvim'
+  -- Startup optimization
+  use 'lewis6991/impatient.nvim'
   -- Fuzzy finder
   use {
     'nvim-telescope/telescope.nvim',
