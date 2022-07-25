@@ -122,7 +122,10 @@ local function plugins(use)
     config = function() require 'config.onedark'.config() end
   }
   -- Interactive evaluation
-  use 'Olical/conjure'
+  use {
+    'Olical/conjure',
+    config = function() require 'config.conjure'.config() end
+  }
   -- Sexp editing
   use 'guns/vim-sexp'
   use 'tpope/vim-sexp-mappings-for-regular-people'
