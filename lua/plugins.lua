@@ -110,6 +110,7 @@ local function plugins(use)
   -- Autotags
   use {
     'windwp/nvim-ts-autotag',
+    after = 'nvim-treesitter',
     config = function() require 'config.autotags'.config() end
   }
   -- Surround editing
