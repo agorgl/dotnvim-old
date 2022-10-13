@@ -48,7 +48,7 @@ local function plugins(use)
   -- Syntax highlighting
   use {
     'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate',
+    run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
     config = function() require 'config.treesitter'.config() end
   }
   -- Completion engine
