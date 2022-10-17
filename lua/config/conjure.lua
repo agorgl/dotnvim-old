@@ -9,11 +9,18 @@ function M.config()
   g['conjure#client#clojure#nrepl#mapping#refresh_clear'] = false
 
   local api = vim.api
+  local cmd = vim.cmd
+  local shadow_selected = false
   local shadow_select_group = api.nvim_create_augroup('cljs_shadow_select', { clear = true })
   api.nvim_create_autocmd('BufReadPost', {
     group = shadow_select_group,
     pattern = '*.cljs',
-    command = 'ConjureShadowSelect app',
+    callback = function()
+      if not shadow_selected then
+        cmd('ConjureShadowSelect app')
+        shadow_selected = true
+      end
+    end
   })
 end
 
