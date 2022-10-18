@@ -77,15 +77,16 @@ function M.config()
   end
 
   local servers = {
-    "ccls",
-    "rust_analyzer",
-    "gopls",
-    "jdtls",
-    "tsserver",
-    "pyright",
-    "clojure_lsp",
+    ccls = {},
+    rust_analyzer = {},
+    gopls = {},
+    jdtls = {},
+    tsserver = {},
+    pyright = {},
+    clojure_lsp = {},
   }
-  for _, lsp in pairs(servers) do
+
+  for lsp, opts in pairs(servers) do
     plugin[lsp].setup {
       on_attach = on_attach,
       capabilities = capabilities,
