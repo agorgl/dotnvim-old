@@ -10,6 +10,7 @@ function M.config()
 
   local api = vim.api
   local cmd = vim.cmd
+
   local shadow_selected = false
   local shadow_select_group = api.nvim_create_augroup('cljs_shadow_select', { clear = true })
   api.nvim_create_autocmd('BufReadPost', {
@@ -20,6 +21,15 @@ function M.config()
         cmd('ConjureShadowSelect app')
         shadow_selected = true
       end
+    end
+  })
+
+  local conjure_log_group = api.nvim_create_augroup("conjure_log", { clear = true })
+  api.nvim_create_autocmd('BufNewFile', {
+    group = conjure_log_group,
+    pattern = 'conjure-log-*',
+    callback = function()
+      vim.diagnostic.disable(0)
     end
   })
 end
