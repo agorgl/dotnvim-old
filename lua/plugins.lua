@@ -125,6 +125,7 @@ local function plugins(use)
   -- Interactive evaluation
   use {
     'Olical/conjure',
+    ft = {'clojure', 'scheme'},
     config = function() require 'config.conjure'.config() end
   }
   -- Sexp editing
