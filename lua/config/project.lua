@@ -16,7 +16,7 @@ local types = {
       "deps.edn",
     },
     tasks = {
-      run = "clj -M:repl/headless",
+      run = "clj -M:env/dev:repl/headless",
     },
     autorun = 'run',
   },
