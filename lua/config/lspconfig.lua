@@ -83,6 +83,22 @@ function M.config()
     tsserver = {},
     pyright = {},
     clojure_lsp = {},
+    tailwindcss = {
+      filetypes = {"clojure"},
+      settings = {
+        tailwindCSS = {
+          experimental = {
+            classRegex = {
+              ":class\\s+\"([^\"]*)\"",
+              ":[\\w-.#>]+\\.([\\w-]*)"
+            },
+          },
+          includeLanguages = {
+            clojure = "html"
+          },
+        },
+      },
+    },
   }
 
   for lsp, opts in pairs(servers) do
