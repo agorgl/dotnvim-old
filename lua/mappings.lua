@@ -1,6 +1,7 @@
 local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 local g = vim.g
+local fn = vim.fn
 
 -- Leader Key
 g.mapleader = ","
@@ -48,3 +49,6 @@ map("n", "<leader>gg", "<cmd>tab G<CR>", opts)
 map({"n","t"}, "<leader>rr", require('config.project').exec, opts)
 map({"n","t"}, "<leader>rb", require('config.project').exec_background, opts)
 map({"n","t"}, "<leader>t", "<cmd>ToggleTerm<CR>", opts)
+
+-- Custom
+map({"v","x"}, "<leader>h", ":'<,'>!" .. fn.stdpath("config") .. "/scripts/html2hiccup.clj<CR>", opts)
