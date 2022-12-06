@@ -115,6 +115,10 @@ function M.exec(task, background)
   else
     term:spawn()
   end
+
+  if postrun then
+    postrun(term)
+  end
 end
 
 function M.exec_background(task)
@@ -140,6 +144,7 @@ function M.config()
     if type then
       tasks = types[type].tasks
       autorun = types[type].autorun
+      postrun = types[type].postrun
       if autorun then
         print(string.format("Launching '%s' in background", tasks[autorun]))
         M.exec_background(autorun)
