@@ -64,6 +64,27 @@ local types = {
       clean = "npm ci",
     },
   },
+  flutter = {
+    patterns = {
+      "pubspec.yaml",
+    },
+    tasks = {
+      run = "flutter run",
+      build = "flutter build",
+      clean = "flutter clean",
+    },
+    postrun = function(term)
+      local api = vim.api
+      local hot_reload_group = api.nvim_create_augroup('hot_reload', { clear = true })
+      api.nvim_create_autocmd('BufWritePost', {
+        group = hot_reload_group,
+        pattern = '*.dart',
+        callback = function ()
+          term:send('r', true)
+        end,
+      })
+    end,
+  },
 }
 
 local function project_type(root)
