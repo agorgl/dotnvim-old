@@ -83,6 +83,7 @@ function M.config()
     tsserver = {},
     pyright = {},
     clojure_lsp = {},
+    dartls = {},
     tailwindcss = {
       filetypes = {"clojure"},
       settings = {
