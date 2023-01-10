@@ -103,9 +103,11 @@ function M.config()
   }
 
   for lsp, opts in pairs(servers) do
+    local capabilities = cmp_nvim_lsp.default_capabilities()
     plugin[lsp].setup {
       filetypes = opts.filetypes,
       settings = opts.settings,
+      capabilities = capabilities,
       on_attach = on_attach,
       flags = {
         -- This will be the default in neovim 0.7+
