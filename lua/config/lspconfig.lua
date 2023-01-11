@@ -104,9 +104,7 @@ function M.config()
 
   for lsp, opts in pairs(servers) do
     local capabilities = cmp_nvim_lsp.default_capabilities()
-    plugin[lsp].setup {
-      filetypes = opts.filetypes,
-      settings = opts.settings,
+    local config = {
       capabilities = capabilities,
       on_attach = on_attach,
       flags = {
@@ -114,6 +112,8 @@ function M.config()
         debounce_text_changes = 150,
       }
     }
+    for k,v in pairs(opts) do config[k] = v end
+    plugin[lsp].setup(config)
   end
 
   local null_ls = require "null-ls"
