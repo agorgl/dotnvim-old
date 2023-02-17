@@ -85,7 +85,6 @@ function M.config()
     clojure_lsp = {},
     dartls = {},
     tailwindcss = {
-      filetypes = {"clojure"},
       settings = {
         tailwindCSS = {
           experimental = {
