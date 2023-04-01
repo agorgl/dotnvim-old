@@ -10,16 +10,36 @@ function M.config()
 
   local api = vim.api
   local cmd = vim.cmd
+  local wait = function(interval) vim.wait(interval, function() end) end
 
-  local shadow_selected = false
-  local shadow_select_group = api.nvim_create_augroup('cljs_shadow_select', { clear = true })
-  api.nvim_create_autocmd('BufReadPost', {
-    group = shadow_select_group,
+  local clj_init = false
+  local cljs_attached = false
+  local conjure_session_setup_group = api.nvim_create_augroup('conjure_session_setup', { clear = true })
+  api.nvim_create_autocmd('BufEnter', {
+    group = conjure_session_setup_group,
+    pattern = {'*.clj', '*.cljc'},
+    callback = function()
+      cmd('ConjureClientState clj')
+      clj_init = true
+    end
+  })
+  api.nvim_create_autocmd('BufEnter', {
+    group = conjure_session_setup_group,
     pattern = '*.cljs',
     callback = function()
-      if not shadow_selected then
+      if not clj_init then
+        cmd('ConjureClientState clj')
+        wait(150) -- wait for connect
+        clj_init = true
+      end
+
+      cmd('ConjureClientState cljs')
+      if not cljs_attached then
+        wait(150) -- wait for connect
+        cmd('ConjureCljSessionFresh')
+        wait(150) -- wait for session clone
         cmd('ConjureShadowSelect app')
-        shadow_selected = true
+        cljs_attached = true
       end
     end
   })
