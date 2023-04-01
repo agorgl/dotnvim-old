@@ -15,6 +15,9 @@ local types = {
     patterns = {
       "deps.edn",
     },
+    skip_patterns = {
+      "shadow-cljs.edn",
+    },
     tasks = {
       run = "clj -M:env/dev:repl/headless",
     },
