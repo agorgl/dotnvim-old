@@ -136,6 +136,16 @@ local function plugins(use)
     'eraserhd/parinfer-rust',
     run = 'cargo build --release'
   }
+  -- Markdown
+  use {
+    'iamcco/markdown-preview.nvim',
+    ft = { "markdown" },
+    run = function() vim.fn["mkdp#util#install"]() end,
+    setup = function()
+      vim.g.mkdp_theme = 'dark'
+      vim.g.mkdp_filetypes = { "markdown" }
+    end
+  }
 end
 
 local luapath = fn.resolve(fn.stdpath("config")) .. "/lua"
