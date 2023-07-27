@@ -25,11 +25,12 @@ function M.config()
     end
   end
 
+  local is_connected = function() return server['connected?']() end
   local connect = function(cb)
-    if not server['connected?']() then
+    if not is_connected() then
       return action['connect-port-file']({["silent?"] = true, ["cb"] = cb})
     else
-      cb()
+      if cb then cb() end
     end
   end
 
@@ -37,8 +38,6 @@ function M.config()
   local clone_fresh_session = function() action['clone-fresh-session']() end
   local shadow_select = function(build) action['shadow-select'](build) end
 
-  local clj_initialized = false
-  local cljs_initialized = false
   local conjure_session_setup_group = api.nvim_create_augroup('conjure_session_setup', { clear = true })
   api.nvim_create_autocmd('BufEnter', {
     group = conjure_session_setup_group,
@@ -50,10 +49,8 @@ function M.config()
       end
 
       client_state("clj")
-      if not clj_initialized then
-        connect(function()
-          clj_initialized = true
-        end)
+      if not is_connected() then
+        connect()
       end
     end
   })
@@ -63,22 +60,21 @@ function M.config()
     callback = function()
       local cljs_setup = function()
         client_state("cljs")
-        if not cljs_initialized then
+        if not is_connected() then
           connect(function()
             vim.schedule(function()
               clone_fresh_session()
               vim.defer_fn(function()
                 shadow_select("app")
-                cljs_initialized = true
               end, 150)
             end)
           end)
         end
       end
-      if not clj_initialized then
-        client_state("clj")
+
+      client_state("clj")
+      if not is_connected() then
         connect(function()
-          clj_initialized = true
           vim.defer_fn(function()
             cljs_setup()
           end, 150)
