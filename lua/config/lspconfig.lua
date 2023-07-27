@@ -5,6 +5,7 @@ function M.config()
   if not ok then
     return
   end
+  local lsp_util = require("lspconfig.util")
 
   -- Setup cmp integration
   local cmp_nvim_lsp = require("cmp_nvim_lsp")
@@ -98,6 +99,12 @@ function M.config()
           },
         },
       },
+      root_dir = function(fname)
+        local tailwindcss_config = lsp_util.root_pattern('tailwind.config.js', 'tailwind.config.cjs', 'tailwind.config.mjs', 'tailwind.config.ts')(fname)
+        local postcss_config = lsp_util.root_pattern('postcss.config.js', 'postcss.config.cjs', 'postcss.config.mjs', 'postcss.config.ts')(fname)
+        local node_config = lsp_util.find_package_json_ancestor(fname) or lsp_util.find_node_modules_ancestor(fname)
+        return tailwindcss_config or postcss_config or node_config
+      end
     },
   }
 
