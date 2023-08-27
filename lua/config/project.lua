@@ -30,6 +30,7 @@ local types = {
     tasks = {
       run = "npx shadow-cljs watch app",
     },
+    autorun = 'run',
   },
   maven = {
     patterns = {
