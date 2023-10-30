@@ -16,6 +16,7 @@ function M.config()
   local client = require('conjure.client')
   local server = require('conjure.client.clojure.nrepl.server')
   local action = require('conjure.client.clojure.nrepl.action')
+  local autorepl = require('conjure.client.clojure.nrepl.auto-repl')
 
   local client_state = function(key)
     if key == nil or key == '' then
@@ -31,6 +32,11 @@ function M.config()
       return action['connect-port-file']({["silent?"] = true, ["cb"] = cb})
     else
       if cb then cb() end
+    end
+  end
+  local autorepl = function()
+    if not is_connected() then
+      return autorepl['upsert-auto-repl-proc']()
     end
   end
 
@@ -81,6 +87,21 @@ function M.config()
         end)
       else
         cljs_setup()
+      end
+    end
+  })
+  api.nvim_create_autocmd('BufEnter', {
+    group = conjure_session_setup_group,
+    pattern = '*.bb',
+    callback = function()
+      client_state("bb")
+      if not is_connected() then
+        vim.schedule(function()
+          autorepl()
+          vim.defer_fn(function()
+            connect()
+          end, 150)
+        end)
       end
     end
   })
