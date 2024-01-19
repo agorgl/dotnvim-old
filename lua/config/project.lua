@@ -19,7 +19,7 @@ local types = {
       "shadow-cljs.edn",
     },
     tasks = {
-      run = "clj -M:env/dev:repl/headless",
+      run = "clj -M:dev:repl/headless",
     },
     autorun = 'run',
   },
