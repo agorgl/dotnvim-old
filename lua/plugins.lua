@@ -115,6 +115,8 @@ local function plugins(use)
   }
   -- Surround editing
   use 'tpope/vim-surround'
+  -- Alignment
+  use 'junegunn/vim-easy-align'
   -- Buffer option heuristics
   use 'tpope/vim-sleuth'
   -- Colorscheme
