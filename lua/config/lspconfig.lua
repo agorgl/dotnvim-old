@@ -10,6 +10,13 @@ function M.config()
   -- Setup cmp integration
   local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
+  -- Use an on_init function to disable the lsp semantic highlight
+  local on_init = function(client, initialization_result)
+    if client.server_capabilities then
+      client.server_capabilities.semanticTokensProvider = false
+    end
+  end
+
   -- Use an on_attach function to only map the following keys
   -- after the language server attaches to the current buffer
   local on_attach = function(client, bufnr)
@@ -112,6 +119,7 @@ function M.config()
     local capabilities = cmp_nvim_lsp.default_capabilities()
     local config = {
       capabilities = capabilities,
+      on_init = on_init,
       on_attach = on_attach,
       flags = {
         -- This will be the default in neovim 0.7+
